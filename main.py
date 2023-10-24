@@ -16,6 +16,33 @@ you can break this into a few smaller NFA's so it's not one humongous machine) d
 """
 
 
+
+def isOperator(s):
+    pass
+
+def isPlus(s):
+    pass
+
+def isStar(s):
+    pass
+
+def isClosedParen(s):
+    pass
+
+def isOpenParen(s):
+    pass
+
+
+# Function to check if the string is a valid decimal integer; Loops through the string and calls the appropriate function for each character in the expression
+def match_expr(s, expr, match_length=0):
+    pass
+
+# Outermost function: Loops through the string and calls the appropriate function for each character
+def match(s):
+    pass
+
+
+
 def main():
     pass
 

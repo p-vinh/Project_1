@@ -1,0 +1,6 @@
+
+Look at the regex and decipher. Example: [] check for open brackets and the contents inside of it.
+
+Go through string 1 by 1. Have a function goes through the string recursively.
+Main function that goes through the string 1 by 1. If it finds an open bracket, it calls the recursive function.
+
