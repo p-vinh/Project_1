@@ -20,7 +20,10 @@ class NFA:
             # if there are no next states, return False
             if not self.current_states:
                 return False
-
+        
+        # Edge case: if there is only one character, get the next states.
+        self.current_states = self.get_next_states(None) # Get all lambda transitions from the current states.
+        
         return any(state in self.accepting_states for state in self.current_states)
 
     def get_next_states(self, symbol):
@@ -30,7 +33,7 @@ class NFA:
                 next_states.update(self.transitions[(state, symbol)])
             if (state, None) in self.transitions:
                 next_states.update(self.transitions[(state, None)])
-
+                
         return next_states
     
     def reset(self):
