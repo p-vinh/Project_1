@@ -16,33 +16,32 @@ you can break this into a few smaller NFA's so it's not one humongous machine) d
 """
 
 import NFA
+import random
 
+# Debug function
+def generate_test_cases():
+    test_cases = []
 
+    for _ in range(10):
+        # Nonzerodigit
+        start = ''.join(str(random.randint(0, 9)) for _ in range(1, 3))
+        
+        choice = random.randint(0, 1)
+        # (["_"] digit)*
+        if choice == 0:
+            for _ in range(5):
+                rest = ''.join([random.choice(['_', '']) + str(random.randint(0, 9)) for _ in range(1, 3)])
+            test_cases.append(start + rest)
+            
+        # "0"+ (["_"] "0")* 
+        elif choice == 1:
+            for _ in range(5):
+                start = '0' * random.randint(0, 3) # 1 or more 0's. Is able to generate invalid strings
+                rest = ''.join([random.choice(['_', '', '0']) for _ in range(4)])
+            test_cases.append(start + rest)
+    
 
-def isOperator(s):
-    pass
-
-def isPlus(s):
-    pass
-
-def isStar(s):
-    pass
-
-def isClosedParen(s):
-    pass
-
-def isOpenParen(s):
-    pass
-
-
-# Function to check if the string is a valid decimal integer; Loops through the string and calls the appropriate function for each character in the expression
-def match_expr(s, expr, match_length=0):
-    pass
-
-# Outermost function: Loops through the string and calls the appropriate function for each character
-def match(s):
-    pass
-
+    return test_cases
 
 
 def main():
@@ -78,16 +77,24 @@ def main():
     accepting_states = {'q3'}
     nfa = NFA.NFA(states, alphabet, transitions, initial_state, accepting_states)
     
-    while True:
-        s = input("Enter a string: ")
+    # while True:
+    #     s = input("Enter a string: ")
         
-        if s == "quit":
-            break
+    #     if s == "quit":
+    #         break
         
-        if nfa.process_input(s):
-            print("Valid decimal integer literal")
+    #     if nfa.process_input(s):
+    #         print("Valid decimal integer literal")
+    #     else:
+    #         print("Invalid decimal integer literal")
+
+    test_cases = generate_test_cases()
+    
+    for test_case in test_cases:
+        if nfa.process_input(test_case):
+            print(f"{test_case}: Valid")
         else:
-            print("Invalid decimal integer literal")
+            print(f"{test_case}: Invalid")
 
         nfa.reset()    
 
