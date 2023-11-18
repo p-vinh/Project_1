@@ -77,26 +77,28 @@ def main():
     accepting_states = {'q3'}
     nfa = NFA.NFA(states, alphabet, transitions, initial_state, accepting_states)
     
-    # while True:
-    #     s = input("Enter a string: ")
+    while True:
+        s = input("Enter a string: ")
         
-    #     if s == "quit":
-    #         break
+        if s == "quit":
+            break
         
-    #     if nfa.process_input(s):
-    #         print("Valid decimal integer literal")
-    #     else:
-    #         print("Invalid decimal integer literal")
-
-    test_cases = generate_test_cases()
-    
-    for test_case in test_cases:
-        if nfa.process_input(test_case):
-            print(f"{test_case}: Valid")
+        if nfa.process_input(s):
+            print("Valid decimal integer literal")
         else:
-            print(f"{test_case}: Invalid")
+            print("Invalid decimal integer literal")
+        
+        nfa.reset()
 
-        nfa.reset()    
+    # test_cases = generate_test_cases()
+    
+    # for test_case in test_cases:
+    #     if nfa.process_input(test_case):
+    #         print(f"{test_case}: Valid")
+    #     else:
+    #         print(f"{test_case}: Invalid")
+
+    #     nfa.reset()    
 
 
 
