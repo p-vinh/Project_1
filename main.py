@@ -37,11 +37,11 @@ def generate_test_cases():
 
 
 def main():
-    states = {'q0', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q10'}
+    states = {'q0', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q10', 'q11'}
     alphabet = set("0123456789_+-eE.")
     transitions = {
                     # floatnumber   ::=  pointfloat | exponentfloat
-                    ('q0', None): {'q1', 'q2'},
+                    ('q0', None): {'q1', 'q3'},
                     
                     # pointfloat ::=  [digitpart] fraction
                     **{('q2', digit): {'q3'} for digit in '0123456789'},

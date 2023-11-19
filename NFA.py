@@ -16,11 +16,8 @@ class NFA:
                 return False
             
         for symbol in input_string:
-            previous_states = self.current_states.copy()
             self.current_states = self.get_next_states(None)
-            
             self.current_states.update(self.get_next_states(symbol))
-            self.current_states -= previous_states
             
             # if there are no next states, return False
             if not self.current_states:
