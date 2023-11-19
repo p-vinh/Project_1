@@ -37,36 +37,40 @@ def generate_test_cases():
 
 
 def main():
-    states = {'q0', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q10', 'q11'}
-    alphabet = set("0123456789_")
+    states = {'q0', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q10'}
+    alphabet = set("0123456789_+-eE.")
     transitions = {
-                   # non-zero digit 
-                   **{('q0', str(digit)): {'q10'} for digit in range(1, 10)},
-                   **{('q10', str(digit)): {'q10'} for digit in range(1, 10)},
-                   
-                   # lambda transition
-                   ('q10', None) : {'q2', 'q3', 'q8'},
-                   ('q10', '_') : {'q8'},
-                   
-                   # 0+
-                   ('q2', '0') : {'q4'},
-                   ('q4', '0') : {'q4'},
-                   
-                   # (["_"] 0)*
-                   ('q4', None) : {'q5', 'q10'},
-                   ('q5', '_') : {'q6'},
-                   ('q5', None) : {'q6'},
-                   ('q6', '0') : {'q7'},
-                   ('q7', None) : {'q5', 'q10'},
-                   
-                   # (["_"] digit)*
-                   **{('q8', str(digit)): {'q11'} for digit in range(0, 10)},
-                   **{('q11', str(digit)): {'q11'} for digit in range(0, 10)},               
-                   ('q11', None) : {'q3', 'q10'}
+                    # floatnumber   ::=  pointfloat | exponentfloat
+                    ('q0', None): {'q1', 'q2'},
+                    
+                    # pointfloat ::=  [digitpart] fraction
+                    **{('q2', digit): {'q3'} for digit in '0123456789'},
+                    ('q2', None): {'q3'},
+                    ('q3', None): {'q4'},
+                    ('q3', '_'): {'q4'},
+                    **{('q4', digit): {'q5'} for digit in '0123456789'},
+                    ('q5', None): {'q3'},
+                    
+                    # fraction: "." digitpart | digitpart "."
+                    ('q3', '.'): {'q1'},
+                    **{('q1', digit): {'q6'} for digit in '0123456789'},
+                    **{('q7', digit): {'q8'} for digit in '0123456789'},
+                    ('q8', None): {'q6'},
+                    ('q3', None): {'q11'},
+                    ('q6', None): {'q11', 'q7', 'q9'},
+                    ('q6', '_'): {'q7'},
+                    ('q6', '.'): {'q9'},
+                    
+                    # exponentfloat ::= (digitpart | pointfloat) exponent
+                    ('q11', 'e'): {'q10'},
+                    ('q11', 'E'): {'q10'},
+                    ('q10', '+'): {'q1'},
+                    ('q10', '-'): {'q1'},
+                    ('q10', None): {'q1'}
                   }
     
     initial_state = 'q0'
-    accepting_states = {'q3'}
+    accepting_states = {'q9'}
     nfa = NFA.NFA(states, alphabet, transitions, initial_state, accepting_states)
     
     while True:
@@ -76,9 +80,9 @@ def main():
             break
         
         if nfa.process_input(s):
-            print("Valid decimal integer literal")
+            print("Valid Floating point literals")
         else:
-            print("Invalid decimal integer literal")
+            print("Invalid Floating point literals")
         
         nfa.reset()
 
