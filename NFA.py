@@ -9,14 +9,18 @@ class NFA:
         self.accepting_states = accepting_states
 
     def process_input(self, input_string):
+        previous_states = set()
         
         for char in input_string:
             if char not in self.alphabet:
                 return False
             
         for symbol in input_string:
+            previous_states = self.current_states.copy()
             self.current_states = self.get_next_states(None)
+            
             self.current_states.update(self.get_next_states(symbol))
+            self.current_states -= previous_states
             
             # if there are no next states, return False
             if not self.current_states:
@@ -34,6 +38,7 @@ class NFA:
                 next_states.update(self.transitions[(state, symbol)])
             if (state, None) in self.transitions:
                 next_states.update(self.transitions[(state, None)])
+
                 
         return next_states
     
