@@ -1,5 +1,4 @@
 class NFA:
-    #this is decIntegers only
     def __init__(self, states, alphabet, transitions, initial_state, accepting_states):
         self.states = states
         self.alphabet = alphabet
