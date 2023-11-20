@@ -10,3 +10,8 @@
 - **Octal and Hexadecimal Integer Code:** Vinh
 - **Extra Credit Code:** Vinh
 - **README:** Derek
+
+> [!TIP]
+> Unlimited string character count (not limited to 20)
+> Type 'quit' to quit
+> Prompted input string
