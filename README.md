@@ -13,5 +13,9 @@
 
 > [!TIP]
 > Unlimited string character count (not limited to 20)
+
+> [!TIP] 
 > Type 'quit' to quit
+
+> [!TIP]
 > Prompted input string
