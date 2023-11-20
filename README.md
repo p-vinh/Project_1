@@ -11,6 +11,9 @@
 - **Extra Credit Code:** Vinh
 - **README:** Derek
 
+## Project Description:
+ This project is a Python program that recognizes numerical literals (Decimal, Octal, Hexadecimal integer, and Floating point literals). It aims to accept or reject the inputted string from the user.
+
 > [!TIP]
 > Unlimited string character count (not limited to 20)
 
