@@ -39,31 +39,6 @@ def generate_test_cases():
 def main():
     states = {'q0', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8'}
     alphabet = set("0123456789_")
-    # transitions = {
-    #                # non-zero digit 
-    #                **{('q0', str(digit)): {'q10'} for digit in range(1, 10)},
-    #                **{('q10', str(digit)): {'q10'} for digit in range(1, 10)},
-                   
-    #                # lambda transition
-    #                ('q10', "eps") : {'q2', 'q3', 'q8'},
-    #                ('q10', '_') : {'q8'},
-                   
-    #                # 0+
-    #                ('q2', '0') : {'q4'},
-    #                ('q4', '0') : {'q4'},
-                   
-    #                # (["_"] 0)*
-    #                ('q4', "eps") : {'q5', 'q10'},
-    #                ('q5', '_') : {'q6'},
-    #                ('q5', "eps") : {'q6'},
-    #                ('q6', '0') : {'q7'},
-    #                ('q7', "eps") : {'q5', 'q10'},
-                   
-    #                # (["_"] digit)*
-    #                **{('q8', str(digit)): {'q11'} for digit in range(0, 10)},
-    #                **{('q11', str(digit)): {'q11'} for digit in range(0, 10)},               
-    #                ('q11', "eps") : {'q3', 'q10'}
-    #               }
     
     transitions = {
         **{('q0', str(digit)): {'q1'} for digit in range(1, 10)},

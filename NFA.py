@@ -35,12 +35,3 @@ class NFA:
     def reset(self):
         self.current_states = {self.initial_state}
     
-# states = {'q0', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10', 'q11'}
-# alphabet = set("0123456789_")
-# transitions = {('q0', '0'): {'q1'}, ('q1', '1'): {'q2'}, ('q2', '0'): {'q0'}}
-# initial_state = 'q0'
-# accepting_states = {'q2'}
-
-
-
-# nfa = NFA(states, alphabet, transitions, initial_state, accepting_states)
