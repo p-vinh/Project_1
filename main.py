@@ -128,11 +128,20 @@ def main():
         ('q10', '+') : {'q13'},
         ('q10', '-') : {'q13'},
         
+        **{('q11', str(c)): {'q10'} for c in range(10)},
+        ('q11', 'e'): {'q13'},
+        ('q11', 'E'): {'q13'},
+        ('q11', '_') : {'q13'},
+        ('q11', '.') : {'q13'},
+        ('q11', '+') : {'q13'},
+        ('q11', '-') : {'q13'},
         
+        **{('q12', str(c)): {'q13'} for c in alphabet},
+        **{('q13', str(c)): {'q13'} for c in alphabet}
     }
     
     initial_state = 'q0'
-    accepting_states = {'q1',}
+    accepting_states = {'q1', 'q5', 'q8', 'q7', 'q10', 'q12'}
     nfa = NFA.NFA(states, alphabet, transitions, initial_state, accepting_states)
     
     while True:
