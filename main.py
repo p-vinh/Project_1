@@ -99,7 +99,7 @@ def main():
     hexadecimal_nfa = init_hexadecimal_nfa()
     
     while True:
-        s = input("Enter a string: ")
+        s = input("Enter a string: ").strip()
         
         if s == "quit":
             break
