@@ -36,21 +36,34 @@ def generate_test_cases():
     return test_cases
 
 def init_octal_nfa():
-    states = {'q0', 'q1', 'q2', 'q3', 'q4'}
+    states = {'q0', 'q1', 'q2', 'q3', 'q4', 'q5'}
     alphabet = set("01234567_oO")
     transitions = {
+                    **{('q0', str(digit)): {'q5'} for digit in alphabet if digit != "0"},
                     ('q0', '0'): {'q1'},
+                    
+                    **{('q1', str(digit)): {'q5'} for digit in alphabet if digit != "O" and digit != "o"},
                     ('q1', 'o'): {'q2'},
                     ('q1', 'O'): {'q2'},
                     
+                    **{('q2', str(digit)): {'q3'} for digit in range(8)},
                     ('q2', '_'): {'q4'},
-                    ('q2', None): {'q4'},
+                    ('q2', 'O'): {'q5'},
+                    ('q2', 'o'): {'q5'},
+                    
+                    **{('q3', str(digit)): {'q3'} for digit in range(8)},
+                    ('q3', '_'): {'q4'},
+                    ('q3', 'O'): {'q5'},
+                    ('q3', 'o'): {'q5'},
                     
                     **{('q4', str(digit)): {'q3'} for digit in range(8)},
-                    **{('q3', str(digit)): {'q3'} for digit in range(8)},
-                    ('q3', None): {'q2'}
+                    ('q4', '_'): {'q5'},
+                    ('q4', 'o'): {'q5'},
+                    ('q4', 'O'): {'q5'},
+                    
+                    **{('q5', str(digit)): {'q5'} for digit in alphabet}
                     }
-    
+        
     initial_state = 'q0'
     accepting_states = {'q3'}
     octal_nfa = NFA.NFA(states, alphabet, transitions, initial_state, accepting_states)
@@ -99,7 +112,7 @@ def main():
     hexadecimal_nfa = init_hexadecimal_nfa()
     
     while True:
-        s = input("Enter a string: ")
+        s = input("Enter a string: ").strip()
         
         if s == "quit":
             break

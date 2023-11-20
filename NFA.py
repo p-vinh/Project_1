@@ -16,7 +16,6 @@ class NFA:
         for symbol in input_string:
             self.current_states = self.get_next_states(symbol)
 
-            
             # if there are no next states, return False
             if not self.current_states:
                 return False
