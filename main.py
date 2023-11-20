@@ -62,19 +62,32 @@ def init_hexadecimal_nfa():
     alphabet = set("0123456789abcdefABCDEF_xX")
     transitions = {
                     ('q0', '0'): {'q1'},
+                    **{('q0', str(char)): {'q5'} for char in alphabet if char != "0"},
+
                     ('q1', 'x'): {'q2'},
                     ('q1', 'X'): {'q2'},
+                    **{('q1', str(char)): {'q5'} for char in alphabet if char != "x" and char != "X"},
                     
-                    ('q2', '_'): {'q3'},
-                    ('q2', None): {'q3'},
+                    **{('q2', str(char)): {'q3'} for char in alphabet if char != "_" and char != "x" and char != "X"},
+                    ('q2', '_'): {'q4'},
+                    ('q2', 'x'): {'q5'},
+                    ('q2', 'X'): {'q5'},
                     
-                    **{('q3', str(char)): {'q4'} for char in alphabet if char != "_" and char != "x" and char != "X"},
-                    **{('q4', str(char)): {'q4'} for char in alphabet if char != "_" and char != "x" and char != "X"},
-                    ('q4', None): {'q2', 'q5'}
+                    **{('q3', str(char)): {'q3'} for char in alphabet if char != "_" and char != "x" and char != "X"},
+                    ('q3', 'X'): {'q5'},
+                    ('q3', 'x'): {'q5'},
+                    ('q3', '_'): {'q4'},
+
+                    **{('q4', str(char)): {'q3'} for char in alphabet if char != "_" and char != "x" and char != "X"},
+                    ('q4', 'X'): {'q5'},
+                    ('q4', 'x'): {'q5'},
+                    ('q4', '_'): {'q5'},
+
+                    **{('q5', str(char)): {'q5'} for char in alphabet}
                     }
     
     initial_state = 'q0'
-    accepting_states = {'q5'}
+    accepting_states = {'q3'}
 
     hexadecimal_nfa = NFA.NFA(states, alphabet, transitions, initial_state, accepting_states)
     
