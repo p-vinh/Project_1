@@ -142,9 +142,9 @@ def main():
             break
         
         if nfa.process_input(s):
-            print("Valid Floating point literals")
+            print("Valid Floating point literal")
         else:
-            print("Invalid Floating point literals")
+            print("Invalid Floating point literal")
         
         nfa.reset()
 
